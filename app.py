@@ -53,13 +53,11 @@ def delete_event(id):
     global events
     
     event = next((e for e in events if e.id == id), None)
-    
     if event is None:
-        return jsonify({"error": "Event not found"}), 204
-
+        return jsonify({"error": "Event not found"}), 404
+        
     events = [e for e in events if e.id != id]
-    
-    return jsonify({"message": f"Event {id} deleted successfully"}), 200
+    return '', 204
 
 @app.route('/events', methods=['GET'])
 def get_events():
